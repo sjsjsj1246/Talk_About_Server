@@ -44,10 +44,6 @@ io.on("connection", (socket) => {
     });
 
     callback();
-    // const error = true;
-    // if (error) {
-    //   callback({ error: "error" });
-    // }
   });
   // 유저가 생성한 이벤트에 대한 처리 `on`
   socket.on("sendMessage", (message, callback) => {
