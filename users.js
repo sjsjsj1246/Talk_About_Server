@@ -1,8 +1,20 @@
 const users = [];
+const Color = [
+  "#E47D7E",
+  "#DAD82B",
+  "#BBD831",
+  "#F1622C",
+  "#717CE3",
+  "#AA7DE3",
+  "#66B4E3",
+  "#E39A7D",
+  "#94E3A9",
+];
 
 const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
+  color = Color[Math.floor(Math.random() * Color.length)];
 
   const existingUser = users.find(
     (user) => user.room === room && user.name === name
@@ -12,7 +24,7 @@ const addUser = ({ id, name, room }) => {
     return { error: "Username is taken" };
   }
 
-  const user = { id, name, room };
+  const user = { id, name, room, color };
 
   users.push(user);
   console.log(users, "users");

@@ -5,7 +5,6 @@ const http = require("http");
 
 // users.js
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
-
 const PORT = process.env.PORT || 5000;
 
 // 2. 라우터 설정
@@ -51,9 +50,17 @@ io.on("connection", (socket) => {
     const user = getUser(socket.id);
     // console.log(user); //
     // 해당 방으로 메세지를
-    io.to(user.room).emit("message", { user: user.name, text: message });
+    io.to(user.room).emit("message", {
+      user: user.name,
+      text: message,
+      color: user.color,
+    });
+  });
 
-    // callback();
+  socket.on("getColor", (callback) => {
+    const user = getUser(socket.id);
+    console.log("컬러 요쳥입니다." + socket.id + " " + user.color);
+    io.to(user.room).emit("reciveColor", { color: user.color });
   });
 
   socket.on("disconnect", () => {
